@@ -16,7 +16,7 @@ class TicketController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        return TicketResource::collection(Ticket::all());
+        return TicketResource::collection(Ticket::paginate());
     }
 
     /**
