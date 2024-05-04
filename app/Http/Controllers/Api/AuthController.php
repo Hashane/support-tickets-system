@@ -7,6 +7,7 @@ use App\Http\Requests\Api\LoginUserRequest;
 use App\Models\User;
 use App\Traits\ApiResponses;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -25,5 +26,11 @@ class AuthController extends Controller
                 'token' => $user->createToken('API Token for' . $user->email)->plainTextToken,
             ]
         );
+    }
+
+    public function logout(Request $request): JsonResponse
+    {
+        $request->user()->currentAccessToken()->delete();
+        return $this->success('');
     }
 }
